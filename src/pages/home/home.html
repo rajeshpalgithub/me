@@ -24,15 +24,20 @@
             </ion-item>
             
         </ion-item-group>
-        <ion-item-group >
-              <button menuClose detail-none ion-item color="primary"   (click)="logout()">
-                  <ion-icon name="log-out"></ion-icon> Logout
-              </button>
-        </ion-item-group>
+       <!-- <ion-item-group >
+              
+        </ion-item-group>-->
          
       
     </ion-content>
-  
+    <ion-footer>
+            <ion-toolbar>
+                    <button menuClose detail-none ion-item color="primary"   (click)="logout()">
+                            <ion-icon name="log-out"></ion-icon> Logout
+                    </button>
+            </ion-toolbar>
+    </ion-footer>
+    <button ion-button menuClose>Close Menu</button>
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
