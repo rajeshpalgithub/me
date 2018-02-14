@@ -23,4 +23,10 @@ export class ApiRoleProvider {
     let RequestOptionsArgs={headers,params};
     return this.http.get(apiUrl+'/role/employee',RequestOptionsArgs).map((res:Response)=>res);
   }
+  getRoles(authKey:string,params:any)
+  {
+    let headers = {'Auth-Token':authKey};
+    let RequestOptionsArgs={headers,params};
+    return this.http.get(apiUrl+'/role',RequestOptionsArgs).map((res:Response)=>res);
+  }
 }

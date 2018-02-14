@@ -15,7 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RoleIndexGetPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  pageTitle:string;
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
+    this.pageTitle = this.navParams.data.pageTitle;
   }
 
   ionViewDidLoad() {

@@ -68,14 +68,13 @@ export class AccountIndexGetPage {
     });
     loader.present();
     this.authKeyProvider.getAuthKey().then(authkey=>{
-      let query = {};
+      let query = {"page":1,"records":20};
       //console.log(authkey);
       this.apiAcountProvider.getAccount(authkey,query).subscribe((val)=>{
         loader.dismiss();
         let response:any  = val;
         if(!response.error){
-          this.accounts=response.result;
-          
+          this.accounts=response.result.accounts;
         }else{
           
           let alert=this.alertContol.create({
