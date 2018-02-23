@@ -13,19 +13,30 @@ import {LoginPage} from '../login/login';
 import {AccountIndexPostPage} from '../account-index-post/account-index-post';
 import {AccountIndexGetDetailsPage} from '../account-index-get-details/account-index-get-details';
 
+import {account} from '../../providers/account/account'
 @Component({
   selector: 'page-account-index-get',
   templateUrl: 'account-index-get.html',
 })
-export class AccountIndexGetPage {
+
+
+export class AccountIndexGetPage{
 /***********Comon************ */
   pageTitle:string;
   has_child_menu:number;
   menu_id:any;
   module_name:string;
+  
 /****************** */
-  accounts:any;
+  accounts:account[];
   submenus:any;
+  curent_page:number = 1;
+  total_page:number = 1;
+  records:number=1;
+  total_records:number=0;
+/************ */
+
+
   constructor(private navCtrl: NavController, 
     private modalCtrl:ModalController,
     private navParams: NavParams,
@@ -55,12 +66,80 @@ export class AccountIndexGetPage {
     this.getAllAccounts();
     this.getMenus();
     
+    
   }
   ionViewWillEnter()
   {
     //console.log('will enter');
     
   }
+  doRefresh(refresher)
+  {
+    // get accounts
+   /* let total_page  = Math.ceil(this.total_records / this.records) - 1 ;
+    this.curent_page = this.records + this.curent_page;*/
+   /* if( this.curent_page > total_page)
+    {
+      refresher.complete();
+      return;
+    }*/
+    
+    this.authKeyProvider.getAuthKey().then(authkey=>{
+      let query = {"page":this.records+1,"records":this.records};
+      //console.log(authkey);
+      this.apiAcountProvider.getAccount(authkey,query).subscribe((val)=>{
+        refresher.complete();
+        let response:any  = val;
+        if(!response.error){
+         
+          for(let account of response.result.accounts )
+          {
+           let new_result:account = {"id":account.id,
+                                      "name":account.name,
+                                      "email":account.email,
+                                      "phone":account.phone,};
+           this.accounts.push(new_result);
+          }
+         this.total_records = response.result.total_records;
+          this.records =  this.records + response.result.records;
+        }else{
+          
+          let alert=this.alertContol.create({
+            title:"Error",
+            message:response.errortext,
+            buttons: ['Dismiss']
+          })
+          alert.present();
+        }
+
+        },(err)=>{
+          refresher.complete();
+          
+          if(err.status==401)
+          {
+            let alert=this.alertContol.create({
+              title:"Error",
+              message:"Your session has expired",
+              buttons: [{
+                  text: 'Ok',
+                  role: 'cancel',
+                  handler: data => {
+                    this.globalLoginState.loginState = false;
+                    this.navCtrl.setRoot(LoginPage);
+                  }
+              }]
+            })
+            alert.present();
+            
+          }
+      });
+      
+    });
+
+  }
+
+  
+
   getAllAccounts()
   {
     let loader=this.loadinControler.create({
@@ -68,13 +147,16 @@ export class AccountIndexGetPage {
     });
     loader.present();
     this.authKeyProvider.getAuthKey().then(authkey=>{
-      let query = {"page":1,"records":20};
+      
+      let query = {"page":this.curent_page,"records":this.records};
       //console.log(authkey);
       this.apiAcountProvider.getAccount(authkey,query).subscribe((val)=>{
         loader.dismiss();
         let response:any  = val;
         if(!response.error){
           this.accounts=response.result.accounts;
+          this.total_records = response.result.total_records;
+          this.records =  response.result.records;
         }else{
           
           let alert=this.alertContol.create({
@@ -146,7 +228,7 @@ export class AccountIndexGetPage {
         let response:any  = val;
         if(!response.error){
           this.submenus=response.result.menu_link;
-          console.log(this.submenus);
+         // console.log(this.submenus);
         }else{
           
           let alert=this.alertContol.create({

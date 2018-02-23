@@ -38,6 +38,7 @@ import { ApiRoleProvider } from '../providers/api-role/api-role';
 
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -90,6 +91,7 @@ import { ApiRoleProvider } from '../providers/api-role/api-role';
     ApiMenuProvider,
     ApiAccountProvider,
     ApiRoleProvider,
+    
     
   ]
 })

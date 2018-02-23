@@ -16,15 +16,15 @@
 
 
 <ion-content >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list > 
     <button ion-item *ngFor="let account of accounts" (click)="itemSelected(account)">
       {{account.name}}
     </button>  
   </ion-list>
-
-  
-  
 </ion-content>
 <!--- addning new account -->
 <ng-container *ngIf="submenus">
