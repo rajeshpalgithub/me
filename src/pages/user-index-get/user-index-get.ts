@@ -5,18 +5,18 @@ import {LoginStateProvider} from '../../providers/login-state/login-state';
 import {AuthKeyProvider} from '../../providers/auth-key/auth-key';
 import {ApiMenuProvider} from '../../providers/api-menu/api-menu';
 
-import {ApiRoleProvider} from '../../providers/api-role/api-role';
+import {ApiUserProvider} from '../../providers/api-user/api-user';
 
 import {LoginPage} from '../../pages/login/login';
 import {RoleEmployeeGetDetailsPage} from '../../pages/role-employee-get-details/role-employee-get-details';
-import {RoleEmployeePostPage} from '../../pages/role-employee-post/role-employee-post';
+import {UserIndexPostPage} from '../../pages/user-index-post/user-index-post';
 
 @IonicPage()
 @Component({
-  selector: 'page-role-employee-get',
-  templateUrl: 'role-employee-get.html',
+  selector: 'page-user-index-get',
+  templateUrl: 'user-index-get.html',
 })
-export class RoleEmployeeGetPage {
+export class UserIndexGetPage {
 
   /***********Comon************ */
   pageTitle:string;
@@ -38,7 +38,7 @@ export class RoleEmployeeGetPage {
     private alertContol:AlertController,
     private actionSheetCtrl: ActionSheetController,
 
-    private apiRoleProvider: ApiRoleProvider
+    private apiUserProvider: ApiUserProvider
   ) {
     this.pageTitle=navParams.data.pageTitle;
     this.has_child_menu = navParams.data.submenu.has_child;
@@ -59,11 +59,11 @@ export class RoleEmployeeGetPage {
     this.authKeyProvider.getAuthKey().then(authkey=>{
       let query = {};
       //console.log(authkey);
-      this.apiRoleProvider.getEmployee(authkey,query).subscribe((val)=>{
+      this.apiUserProvider.getEmployee(authkey,query).subscribe((val)=>{
         loader.dismiss();
         let response:any  = val;
         if(!response.error){
-          this.employees=response.result;
+          this.employees=response.result.users;
           
         }else{
           
@@ -153,7 +153,7 @@ export class RoleEmployeeGetPage {
   }
   openNewEmployeeModal()
   {
-    let newEmployeeModal = this.modalCtrl.create(RoleEmployeePostPage);
+    let newEmployeeModal = this.modalCtrl.create(UserIndexPostPage);
     newEmployeeModal.onDidDismiss(data => {
       console.log(data);
     });

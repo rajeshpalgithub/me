@@ -15,10 +15,10 @@ import {AccountIndexPutPage} from '../pages/account-index-put/account-index-put'
 import {AccountIndexPostPage} from '../pages/account-index-post/account-index-post';
 import {DashboardPage} from '../pages/dashboard/dashboard';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal';
-import {RoleEmployeeGetPage} from '../pages/role-employee-get/role-employee-get';
-import {RoleIndexGetPage} from '../pages/role-index-get/role-index-get';
+import {UserIndexGetPage} from '../pages/user-index-get/user-index-get';
+import {UserRoleIndexGetPage} from '../pages/user-role-index-get/user-role-index-get';
 import {RoleEmployeeGetDetailsPage} from '../pages/role-employee-get-details/role-employee-get-details';
-import {RoleEmployeePostPage} from '../pages/role-employee-post/role-employee-post'
+import {UserIndexPostPage} from '../pages/user-index-post/user-index-post'
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,7 +32,7 @@ import { AuthKeyProvider } from '../providers/auth-key/auth-key';
 import {LoginStateProvider} from '../providers/login-state/login-state';
 import { ApiMenuProvider } from '../providers/api-menu/api-menu';
 import { ApiAccountProvider } from '../providers/api-account/api-account';
-import { ApiRoleProvider } from '../providers/api-role/api-role';
+import { ApiUserProvider } from '../providers/api-user/api-user';
 
 
 
@@ -50,10 +50,10 @@ import { ApiRoleProvider } from '../providers/api-role/api-role';
     AccountIndexPutPage,
     MenuModalPage,
     AccountIndexPostPage,
-    RoleEmployeeGetPage,
-    RoleIndexGetPage,
+    UserIndexGetPage,
+    UserRoleIndexGetPage,
     RoleEmployeeGetDetailsPage,
-    RoleEmployeePostPage,
+    UserIndexPostPage,
    
   ],
  
@@ -74,10 +74,10 @@ import { ApiRoleProvider } from '../providers/api-role/api-role';
     AccountIndexPutPage,
     MenuModalPage,
     AccountIndexPostPage,
-    RoleEmployeeGetPage,
-    RoleIndexGetPage,
+    UserIndexGetPage,
+    UserRoleIndexGetPage,
     RoleEmployeeGetDetailsPage,
-    RoleEmployeePostPage,
+    UserIndexPostPage,
    
     
   ],
@@ -90,7 +90,7 @@ import { ApiRoleProvider } from '../providers/api-role/api-role';
     LoginStateProvider,
     ApiMenuProvider,
     ApiAccountProvider,
-    ApiRoleProvider,
+    ApiUserProvider,
     
     
   ]

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { RoleIndexGetPage } from './role-index-get';
+import { UserRoleIndexGetPage } from './user-role-index-get';
 
 @NgModule({
   declarations: [
-    RoleIndexGetPage,
+    UserRoleIndexGetPage,
   ],
   imports: [
-    IonicPageModule.forChild(RoleIndexGetPage),
+    IonicPageModule.forChild(UserRoleIndexGetPage),
   ],
 })
 export class RoleIndexGetPageModule {}

@@ -11,16 +11,16 @@ import { IonicPage, NavController, NavParams,ViewController,ActionSheetControlle
 
 import {LoginStateProvider} from '../../providers/login-state/login-state';
 import {AuthKeyProvider} from '../../providers/auth-key/auth-key';
-import {ApiRoleProvider} from '../../providers/api-role/api-role';
+import {ApiUserProvider} from '../../providers/api-user/api-user';
 
 import {LoginPage} from '../../pages/login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-role-employee-post',
-  templateUrl: 'role-employee-post.html',
+  selector: 'page-user-index-post',
+  templateUrl: 'user-index-post.html',
 })
-export class RoleEmployeePostPage {
+export class UserIndexPostPage {
 
   roles:any;
  
@@ -33,7 +33,7 @@ export class RoleEmployeePostPage {
 
     private globalLoginState:LoginStateProvider,
     private authKeyProvider:AuthKeyProvider,
-    private apiRoleProvider:ApiRoleProvider,
+    private apiUserProvider:ApiUserProvider,
 
     ) {
   }
@@ -59,7 +59,7 @@ export class RoleEmployeePostPage {
     this.authKeyProvider.getAuthKey().then(authkey=>{
       let query = {};
       //console.log(authkey);
-      this.apiRoleProvider.getRoles(authkey,query).subscribe((val)=>{
+      this.apiUserProvider.getRoles(authkey,query).subscribe((val)=>{
         loader.dismiss();
         let response:any  = val;
         if(!response.error){

@@ -10,10 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-role-index-get',
-  templateUrl: 'role-index-get.html',
+  selector: 'page-user-role-index-get',
+  templateUrl: 'user-role-index-get.html',
 })
-export class RoleIndexGetPage {
+export class UserRoleIndexGetPage {
 
   pageTitle:string;
   constructor(private navCtrl: NavController, private navParams: NavParams) {
