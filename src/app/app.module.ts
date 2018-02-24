@@ -60,7 +60,13 @@ import { ApiUserProvider } from '../providers/api-user/api-user';
  
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      platform:{
+        ios:{
+          statusbarPadding: true,
+        }
+      }
+    }),
     IonicStorageModule.forRoot(),
     HttpClientModule
   ],
