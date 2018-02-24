@@ -29,7 +29,7 @@
 <!--- addning new account -->
 <ng-container *ngIf="submenus">
     <ng-container *ngFor="let submenu of submenus[0].method_list">
-      <ion-fab right bottom *ngIf="submenu.menu_type =='main' && submenu.type=='POST'">
+      <ion-fab padding right bottom *ngIf="submenu.menu_type =='main' && submenu.type=='POST'">
             <button ion-fab (click)="openNewAccountModal()">
                 <ion-icon name="add"></ion-icon>
             </button>
