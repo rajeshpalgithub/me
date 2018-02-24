@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController,AlertController,ModalController,ActionSheetController  } from 'ionic-angular';
+import { Platform,NavController, NavParams,LoadingController,AlertController,
+  ModalController,ActionSheetController  } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import {LoginStateProvider} from '../../providers/login-state/login-state';
 import {AuthKeyProvider} from '../../providers/auth-key/auth-key';
@@ -37,7 +39,8 @@ export class AccountIndexGetPage{
 /************ */
 
 
-  constructor(private navCtrl: NavController, 
+  constructor(private plt:Platform, private statusbar:StatusBar,
+    private navCtrl: NavController, 
     private modalCtrl:ModalController,
     private navParams: NavParams,
     private globalLoginState:LoginStateProvider,
@@ -70,6 +73,7 @@ export class AccountIndexGetPage{
   }
   ionViewWillEnter()
   {
+    this.statusbar.overlaysWebView(true);
     //console.log('will enter');
     
   }
