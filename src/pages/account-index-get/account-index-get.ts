@@ -59,7 +59,7 @@ export class AccountIndexGetPage{
    
 
   }
-
+  
   ionViewDidLoad() {
     //console.log('ionViewDidLoad AccountIndexGetPage');
     
