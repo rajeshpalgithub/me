@@ -11,21 +11,23 @@
       </button>
       <ion-title>{{pageTitle}}</ion-title>
     </ion-navbar>
-  </ion-header>
+</ion-header>
 
 
 <ion-content>
-
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list > 
-      <ion-item-sliding *ngFor="let employee of employees">
-        <button ion-item  (click)="itemSelected(employee)">
-            {{employee.name}}
-            <P>{{employee.role_name}}</P>
+      <ion-item-sliding *ngFor="let user of users">
+        <button ion-item  (click)="itemSelected(users)">
+            {{user.name}}
+            <P>{{user.role_name}}</P>
         </button> 
-        <ion-item-options side="right" *ngIf="employee.is_default!=1">
+        <ion-item-options side="right" *ngIf="users.is_default!=1">
             <button ion-button   
-                  (click)="openActionSheet(employee)">
+                  (click)="openActionSheet(users)">
                 <ion-icon name="more"></ion-icon> More
             </button>
            

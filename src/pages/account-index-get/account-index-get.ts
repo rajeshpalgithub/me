@@ -75,14 +75,6 @@ export class AccountIndexGetPage{
   }
   doRefresh(refresher)
   {
-    // get accounts
-   /* let total_page  = Math.ceil(this.total_records / this.records) - 1 ;
-    this.curent_page = this.records + this.curent_page;*/
-   /* if( this.curent_page > total_page)
-    {
-      refresher.complete();
-      return;
-    }*/
     
     this.authKeyProvider.getAuthKey().then(authkey=>{
       let query = {"page":this.records+1,"records":this.records};
@@ -98,7 +90,7 @@ export class AccountIndexGetPage{
                                       "name":account.name,
                                       "email":account.email,
                                       "phone":account.phone,};
-           this.accounts.push(new_result);
+           this.accounts.unshift(new_result);
           }
          this.total_records = response.result.total_records;
           this.records =  this.records + response.result.records;

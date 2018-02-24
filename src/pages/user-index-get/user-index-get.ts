@@ -10,6 +10,7 @@ import {ApiUserProvider} from '../../providers/api-user/api-user';
 import {LoginPage} from '../../pages/login/login';
 import {RoleEmployeeGetDetailsPage} from '../../pages/role-employee-get-details/role-employee-get-details';
 import {UserIndexPostPage} from '../../pages/user-index-post/user-index-post';
+import {Users} from '../../providers/users/users';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,11 @@ export class UserIndexGetPage {
   module_name:string;
 /****************** */
   submenus:any;
-  employees:any;
+  users:Users[];
+  curent_page:number = 1;
+  total_page:number = 1;
+  records:number=1;
+  total_records:number=0;
 
   constructor(
     private navCtrl: NavController, 
@@ -50,6 +55,65 @@ export class UserIndexGetPage {
     this.getAllEmployees();
     this.getMenus();
   }
+
+  doRefresh(refresher)
+  {
+    this.authKeyProvider.getAuthKey().then(authkey=>{
+      let query = {"page":this.records+1,"records":this.records};
+      //console.log(authkey);
+      this.apiUserProvider.getEmployee(authkey,query).subscribe((val)=>{
+        refresher.complete();
+        let response:any  = val;
+        if(!response.error){
+         
+          for(let user of response.result.users )
+          {
+           let new_result:Users = {"user_id":user.user_id,
+                                      "name":user.name,
+                                      "role_name":user.role_name,
+                                      "role_id":user.role_id,
+                                      "is_default":user.is_default
+                                  };
+           this.users.unshift(new_result);
+           
+          }
+          this.total_records = response.result.total_records;
+          this.records =  this.records + response.result.records;
+        }else{
+          
+          let alert=this.alertContol.create({
+            title:"Error",
+            message:response.errortext,
+            buttons: ['Dismiss']
+          })
+          alert.present();
+        }
+
+        },(err)=>{
+          refresher.complete();
+          
+          if(err.status==401)
+          {
+            let alert=this.alertContol.create({
+              title:"Error",
+              message:"Your session has expired",
+              buttons: [{
+                  text: 'Ok',
+                  role: 'cancel',
+                  handler: data => {
+                    this.globalLoginState.loginState = false;
+                    this.navCtrl.setRoot(LoginPage);
+                  }
+              }]
+            })
+            alert.present();
+            
+          }
+      });
+      
+    });
+  }
+
   getAllEmployees()
   {
     let loader=this.loadinControler.create({
@@ -57,14 +121,15 @@ export class UserIndexGetPage {
     });
     loader.present();
     this.authKeyProvider.getAuthKey().then(authkey=>{
-      let query = {};
+      let query = {'page':1,'records':1};
       //console.log(authkey);
       this.apiUserProvider.getEmployee(authkey,query).subscribe((val)=>{
         loader.dismiss();
         let response:any  = val;
         if(!response.error){
-          this.employees=response.result.users;
-          
+          this.users=response.result.users;
+          this.total_records = response.result.total_records;
+          this.records =  response.result.records;
         }else{
           
           let alert=this.alertContol.create({
