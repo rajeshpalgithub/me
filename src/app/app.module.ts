@@ -33,7 +33,7 @@ import {LoginStateProvider} from '../providers/login-state/login-state';
 import { ApiMenuProvider } from '../providers/api-menu/api-menu';
 import { ApiAccountProvider } from '../providers/api-account/api-account';
 import { ApiUserProvider } from '../providers/api-user/api-user';
-import { UsersProvider } from '../providers/users/users';
+
 
 
 
@@ -92,7 +92,7 @@ import { UsersProvider } from '../providers/users/users';
     ApiMenuProvider,
     ApiAccountProvider,
     ApiUserProvider,
-    UsersProvider,
+   
     
     
   ]
