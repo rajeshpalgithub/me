@@ -121,7 +121,7 @@ export class UserIndexGetPage {
     });
     loader.present();
     this.authKeyProvider.getAuthKey().then(authkey=>{
-      let query = {'page':1,'records':1};
+      let query = {'page':1,'records':this.records};
       //console.log(authkey);
       this.apiUserProvider.getEmployee(authkey,query).subscribe((val)=>{
         loader.dismiss();
