@@ -73,7 +73,7 @@ export class AccountIndexGetPage{
   }
   ionViewWillEnter()
   {
-    this.statusbar.overlaysWebView(false);
+    this.statusbar.overlaysWebView(true);
     //console.log('will enter');
     
   }
